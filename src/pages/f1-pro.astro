@@ -1,0 +1,223 @@
+---
+import Navigation from './components/Navigation.astro';
+---
+
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ULTRA VELOCITY | F1 技术简报</title>
+  <style>
+    /* --- 极客美学定义 --- */
+    @font-face {
+      font-family: 'TechFont';
+      src: local('Orbitron'), local('Rajdhani'), sans-serif;
+    }
+
+    :root {
+      --f1-red: #ff1801;
+      --deep-space: #080808;
+      --accent-blue: #00f3ff;
+      --text-gray: #a0a0a0;
+      --glass: rgba(255, 255, 255, 0.03);
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--deep-space);
+      color: #ffffff;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* --- 滚动动画核心逻辑 (现代浏览器支持) --- */
+    @keyframes reveal {
+      from { opacity: 0; transform: translateY(100px) scale(0.9); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes image-zoom {
+      from { transform: scale(1.2); }
+      to { transform: scale(1); }
+    }
+
+    /* --- 全屏首屏 --- */
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-img {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: url('/f1.jpg') center/cover no-repeat;
+      z-index: -2;
+      animation: image-zoom linear forwards;
+      animation-timeline: scroll();
+      animation-range: start 0% end 50%;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(8,8,8,0.2) 0%, var(--deep-space) 95%);
+      z-index: -1;
+    }
+
+    .hero h1 {
+      font-family: 'TechFont', sans-serif;
+      font-size: clamp(4rem, 15vw, 12rem);
+      font-weight: 900;
+      margin: 0;
+      letter-spacing: -0.05em;
+      text-transform: uppercase;
+      /* 镂空描边效果 */
+      -webkit-text-stroke: 1px rgba(255,255,255,0.3);
+      color: transparent;
+      transition: all 0.5s ease;
+    }
+
+    .hero h1:hover {
+      -webkit-text-stroke: 1px var(--f1-red);
+      color: white;
+      text-shadow: 0 0 30px var(--f1-red);
+    }
+
+    /* --- 参数仪表盘 --- */
+    .stats-bar {
+      position: absolute;
+      bottom: 50px;
+      display: flex;
+      gap: 60px;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+      color: var(--accent-blue);
+    }
+
+    .stats-bar span b { font-size: 1.2rem; color: #fff; margin-right: 5px; }
+
+    /* --- 内容排版 --- */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 100px 20px;
+    }
+
+    .grid-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+      align-items: center;
+      margin-bottom: 200px;
+      /* 这里的动画是关键：滚动时自动触发 */
+      view-timeline-name: --section;
+      view-timeline-axis: block;
+      animation: reveal linear forwards;
+      animation-timeline: --section;
+      animation-range: entry 10% cover 40%;
+    }
+
+    .text-content h2 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      background: linear-gradient(90deg, #fff, var(--text-gray));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .text-content p {
+      font-size: 1.1rem;
+      color: var(--text-gray);
+      line-height: 1.8;
+    }
+
+    .tech-specs {
+      font-family: monospace;
+      background: var(--glass);
+      padding: 30px;
+      border-left: 2px solid var(--f1-red);
+      font-size: 0.9rem;
+    }
+
+    .tech-specs div {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    /* --- 动态光效装饰 --- */
+    .glow-blob {
+      position: absolute;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(255,24,1,0.1) 0%, transparent 70%);
+      z-index: -1;
+      filter: blur(50px);
+    }
+
+  </style>
+</head>
+<body>
+  <Navigation />
+
+  <div class="hero">
+    <div class="hero-img"></div>
+    <div class="hero-overlay"></div>
+    <h1>AERO</h1>
+    <div class="stats-bar">
+      <span><b>350</b> KM/H</span>
+      <span><b>1.8</b> SEC PIT</span>
+      <span><b>1000+</b> BHP</span>
+    </div>
+  </div>
+
+  <main class="container">
+    <div class="glow-blob" style="top: 120%; left: -10%;"></div>
+
+    <section class="grid-section">
+      <div class="text-content">
+        <h2>流体力学之美</h2>
+        <p>
+          在 300km/h 的气流中，赛车不仅是一台机器，更是一个精确的物理模型。
+          利用 **CFD (计算流体动力学)**，每一毫米的侧箱边缘都经过数亿次的偏微分方程计算，
+          旨在将湍流转化为下压力，让赛车在弯道中对抗重力。
+        </p>
+      </div>
+      <div class="tech-specs">
+        <div><span>DRS 减阻系统</span> <span>ACTIVE</span></div>
+        <div><span>前翼迎角</span> <span>12.5°</span></div>
+        <div><span>扩散器效能</span> <span>+18.3%</span></div>
+        <div><span>下压力等级</span> <span>ULTRA</span></div>
+      </div>
+    </section>
+
+    <section class="grid-section" style="grid-template-columns: 0.8fr 1.2fr;">
+      <div class="tech-specs">
+        <div style="color: var(--accent-blue);">// NEURAL NETWORK SIMULATION</div>
+        <div><span>数据点/秒</span> <span>1.2M</span></div>
+        <div><span>进站概率预测</span> <span>89.4%</span></div>
+        <div><span>轮胎退化模型</span> <span>VALID</span></div>
+      </div>
+      <div class="text-content">
+        <h2>数字孪生与 AI 决策</h2>
+        <p>
+          现代 F1 比赛是算力的对抗。基于 **Reinforcement Learning (强化学习)** 的策略模型，
+          实时处理数千台传感器的回传。我们不只是在比赛，我们在实时训练一个能够预判每一个超车窗口的数字灵魂。
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer style="text-align: center; padding: 100px; color: #333; letter-spacing: 10px;">
+    LIMITLESS ENGINEERING
+  </footer>
+</body>
+</html>

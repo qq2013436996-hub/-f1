@@ -1,0 +1,22 @@
+---
+import Navigation from '../components/Navigation.astro';
+---
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>老爷爷的数字艺术馆</title>
+    <style is:global>
+      :root { --accent: #ff1801; --bg: #0a0a0a; }
+      body { margin: 0; background: var(--bg); color: white; font-family: sans-serif; }
+      /* 统一的进场动画 */
+      main { animation: fadeIn 0.8s ease-out; }
+      @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+  </head>
+  <body>
+    <Navigation />
+    <main>
+      <slot /> </main>
+  </body>
+</html>

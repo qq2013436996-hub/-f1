@@ -1,0 +1,116 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+---
+<MainLayout title="王纬博 | AI 开发者 & 艺术探索者">
+  <div class="noise"></div>
+  
+  <section class="stage">
+    <div class="bg-text" aria-hidden="true">ARTIFICIAL ART</div>
+
+    <div class="main-visual">
+      <div class="photo-frame">
+        <div class="image-inner"></div>
+        <div class="line-acc h-line"></div>
+        <div class="line-acc v-line"></div>
+      </div>
+
+      <div class="text-block">
+        <span class="label">CREATIVE DEVELOPER</span>
+        <h1>王纬博 <br/><small>& RESEARCHER</small></h1>
+        <p class="manifesto">
+          在 300KM/H 的算法中寻找色彩的平衡。<br/>
+          将神经网络的复杂，转化为画布上的纯粹。
+        </p>
+        
+        <div class="cta-group">
+          <a href="/f1-pro" class="btn-pro">ENTER THE TRACK <span>→</span></a>
+          <div class="status">
+            <span class="blink">●</span> UTS AI LAB : ACTIVE
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    /* --- 极客艺术风格定义 --- */
+    :root {
+      --primary: #ff1e00;
+      --ink: #050505;
+      --glass: rgba(255, 255, 255, 0.02);
+    }
+
+    .noise {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: url('https://grainy-gradients.vercel.app/noise.svg');
+      opacity: 0.15; pointer-events: none; z-index: 50;
+    }
+
+    .stage {
+      height: 90vh; display: flex; align-items: center; justify-content: center;
+      padding: 0 10vw; position: relative;
+    }
+
+    .bg-text {
+      position: absolute; font-size: 20vw; font-weight: 900;
+      color: rgba(255,255,255,0.02); top: 50%; left: 50%;
+      transform: translate(-50%, -50%); z-index: -1; white-space: nowrap;
+    }
+
+    .main-visual {
+      display: grid; grid-template-columns: 1.2fr 0.8fr;
+      align-items: center; gap: 5vw; width: 100%;
+    }
+
+    /* 破形相框设计 */
+    .photo-frame {
+      position: relative; width: 100%; aspect-ratio: 4/5;
+      max-height: 70vh; background: #111;
+      overflow: visible; /* 允许装饰线溢出 */
+    }
+
+    .image-inner {
+      width: 100%; height: 100%;
+      background: url('/f1-car.jpg') center/cover;
+      filter: grayscale(1) contrast(1.2); /* 默认黑白，更高级 */
+      transition: 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+    }
+
+    .photo-frame:hover .image-inner {
+      filter: grayscale(0) contrast(1);
+      transform: scale(1.05);
+    }
+
+    .line-acc { position: absolute; background: var(--primary); }
+    .h-line { height: 1px; width: 150%; left: -25%; top: 20%; opacity: 0.3; }
+    .v-line { width: 1px; height: 150%; top: -25%; right: 15%; opacity: 0.3; }
+
+    /* 文字排版设计 */
+    h1 { font-size: 6rem; line-height: 0.85; margin: 10px 0; font-weight: 900; }
+    h1 small { font-size: 1.5rem; color: var(--primary); letter-spacing: 5px; }
+    
+    .label { font-family: monospace; font-size: 0.8rem; letter-spacing: 4px; color: #444; }
+    .manifesto { max-width: 400px; color: #888; font-size: 1.1rem; border-left: 2px solid #222; padding-left: 20px; margin: 40px 0; }
+
+    /* 按钮设计 */
+    .btn-pro {
+      display: inline-block; padding: 20px 40px; border: 1px solid #333;
+      color: #fff; text-decoration: none; font-weight: bold;
+      letter-spacing: 2px; position: relative; transition: 0.4s;
+    }
+
+    .btn-pro:hover {
+      background: #fff; color: #000; border-color: #fff;
+    }
+
+    .status { margin-top: 20px; font-family: monospace; font-size: 0.7rem; color: #444; }
+    .blink { color: var(--primary); animation: blink 1s infinite; }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+    @media (max-width: 1024px) {
+      .main-visual { grid-template-columns: 1fr; }
+      h1 { font-size: 4rem; }
+      .photo-frame { order: 2; }
+    }
+  </style>
+</MainLayout>
