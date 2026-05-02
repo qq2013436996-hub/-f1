@@ -1,0 +1,329 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Navigation from './components/Navigation.astro';
+---
+
+<MainLayout title="About | F1 Racing History">
+  <Navigation />
+
+  <div class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="main-title">F1 Racing History</h1>
+      <p class="subtitle">The Evolution of Speed and Innovation</p>
+    </div>
+  </div>
+
+  <main class="container">
+    <div class="glow-blob" style="top: 20%; left: -10%;"></div>
+    <div class="hero-lines hero-lines-1"></div>
+    <div class="hero-lines hero-lines-2"></div>
+
+    <section class="timeline-section">
+      <h2>The Origins (1940s-1950s)</h2>
+      <div class="timeline-content">
+        <div class="text-block">
+          <p>
+            Formula 1 racing began in the aftermath of World War II. The first official F1 World Championship was held in 1950,
+            with the inaugural race at Silverstone, England. Early cars were based on pre-war Grand Prix machines, featuring
+            powerful engines and aerodynamic designs that pushed the limits of technology.
+          </p>
+        </div>
+        <div class="image-card image-card-1">
+          <img src="/1950s%20f1.jpg" alt="1950s F1 Car" loading="lazy" />
+          <span class="image-caption">1950s F1 Car</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="timeline-section">
+      <h2>The Golden Era (1960s-1970s)</h2>
+      <div class="timeline-content reverse">
+        <div class="image-card image-card-2">
+          <img src="/1970s%20f1.jpg" alt="1970s F1 Car" loading="lazy" />
+          <span class="image-caption">1970s F1 Car</span>
+        </div>
+        <div class="text-block">
+          <p>
+            This period saw legendary drivers like Jim Clark, Ayrton Senna, and Niki Lauda dominate the sport.
+            Technological innovations included turbocharged engines and ground-effect aerodynamics, leading to
+            unprecedented speeds and dramatic racing action.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="timeline-section">
+      <h2>Modern F1 (1980s-Present)</h2>
+      <div class="timeline-content">
+        <div class="text-block">
+          <p>
+            The introduction of hybrid power units in 2014 marked a new era of sustainable racing. Today's F1 cars
+            combine V6 turbocharged engines with electric motors, achieving over 1000 horsepower while focusing on
+            efficiency and performance. Advanced aerodynamics, DRS, and real-time data analysis define the modern sport.
+          </p>
+        </div>
+        <div class="image-card image-card-3">
+          <img src="/modern%20f1.jpg" alt="Modern F1 Car" loading="lazy" />
+          <span class="image-caption">Modern F1 Car</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <h2>Explore More</h2>
+      <div class="button-grid">
+        <a href="/" class="nav-button">Home</a>
+        <a href="/f1" class="nav-button">F1 World</a>
+        <a href="/f1-pro" class="nav-button">Track</a>
+        <a href="/wordpress" class="nav-button">WordPress</a>
+      </div>
+    </section>
+  </main>
+
+  <footer style="text-align: center; padding: 100px; color: #333; letter-spacing: 10px;">
+    F1 LEGACY
+  </footer>
+</MainLayout>
+
+<style>
+  .hero {
+    position: relative;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+    overflow: hidden;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .hero-content {
+    text-align: center;
+    z-index: 2;
+    color: #ffffff;
+  }
+
+  .main-title {
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 900;
+    margin: 0;
+    background: linear-gradient(90deg, #ffffff, #ff1801);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+    color: #ff1801;
+    margin: 10px 0;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 100px 20px;
+    color: #ffffff;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  .timeline-section {
+    margin-bottom: 150px;
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeInUp 1s ease-out forwards;
+  }
+
+  .timeline-section:nth-child(1) { animation-delay: 0.2s; }
+  .timeline-section:nth-child(2) { animation-delay: 0.4s; }
+  .timeline-section:nth-child(3) { animation-delay: 0.6s; }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .timeline-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+  }
+
+  .timeline-content.reverse {
+    direction: rtl;
+  }
+
+  .timeline-content.reverse .text-block,
+  .timeline-content.reverse .image-card {
+    direction: ltr;
+  }
+
+  .text-block p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #a0a0a0;
+  }
+
+  .image-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+    transform: translateY(20px);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    border: 1px solid rgba(255, 24, 1, 0.18);
+  }
+
+  .image-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(255, 24, 1, 0.08), transparent 70%);
+    pointer-events: none;
+  }
+
+  .image-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.8s ease;
+  }
+
+  .image-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 50px 100px rgba(255, 24, 1, 0.35);
+  }
+
+  .image-card:hover img {
+    transform: scale(1.05);
+  }
+
+  .image-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 16px 20px;
+    background: rgba(10, 10, 10, 0.6);
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    backdrop-filter: blur(8px);
+  }
+
+  .hero-lines {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.18;
+  }
+
+  .hero-lines-1 {
+    background: linear-gradient(135deg, transparent 30%, rgba(255, 24, 1, 0.12) 31%, rgba(255, 24, 1, 0.12) 32%, transparent 33%);
+    background-size: 60px 60px;
+    animation: drift 20s linear infinite;
+  }
+
+  .hero-lines-2 {
+    background: linear-gradient(225deg, transparent 30%, rgba(255, 255, 255, 0.08) 31%, rgba(255, 255, 255, 0.08) 32%, transparent 33%);
+    background-size: 80px 80px;
+    animation: drift 25s linear infinite reverse;
+  }
+
+  @keyframes drift {
+    from { transform: translate(0, 0); }
+    to { transform: translate(100px, 100px); }
+  }
+
+  .glow-blob {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(255,24,1,0.18) 0%, transparent 60%);
+    filter: blur(70px);
+    z-index: -1;
+    animation: pulse 6s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.15); opacity: 1; }
+  }
+
+  .cta-section {
+    text-align: center;
+    margin-top: 100px;
+  }
+
+  .cta-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    color: #ffffff;
+  }
+
+  .button-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .nav-button {
+    display: block;
+    padding: 15px 30px;
+    background: linear-gradient(45deg, #ff1801, #ff4500);
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 24, 1, 0.3);
+  }
+
+  .nav-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(255, 24, 1, 0.5);
+  }
+
+  footer {
+    text-align: center;
+    padding: 100px 20px;
+    color: #666;
+    letter-spacing: 10px;
+    font-weight: bold;
+  }
+
+  @media (max-width: 768px) {
+    .timeline-content {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    .button-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hero {
+      height: 50vh;
+    }
+
+    .main-title {
+      font-size: clamp(2rem, 10vw, 3rem);
+    }
+  }
+</style>

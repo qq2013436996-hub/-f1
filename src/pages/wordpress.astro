@@ -1,0 +1,108 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Navigation from './components/Navigation.astro';
+
+// Define types
+interface Post {
+  title: string;
+  content: string;
+}
+
+interface Page {
+  title: string;
+  content: string;
+}
+
+const WP_GRAPHQL_URL = "https://astro2.wpenginepowered.com/graphql";
+
+const response = await fetch(WP_GRAPHQL_URL, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    query: `
+      query GetContent {
+        posts {
+          nodes {
+            title
+            content
+          }
+        }
+        pages {
+          nodes {
+            title
+            content
+          }
+        }
+      }
+    `,
+  }),
+});
+
+const { data } = await response.json();
+// Retrieved content from posts and pages
+const allPosts: Post[] = data.posts.nodes;
+const allPages: Page[] = data.pages.nodes;
+---
+
+<MainLayout title="WordPress Content">
+  <Navigation />
+  <div class="container">
+    <section>
+      <h2 class="section-title">Fixed Page Content</h2>
+      {allPages.map(page => (
+        <div class="page-item">
+          <h3>{page.title}</h3>
+          <article set:html={page.content} />
+        </div>
+      ))}
+    </section>
+
+    <hr/>
+
+    <section>
+      <h2 class="section-title">Dynamic Article Updates</h2>
+      {allPosts.map(post => (
+        <div class="post-item">
+          <h3>{post.title}</h3>
+          <article set:html={post.content} />
+        </div>
+      ))}
+    </section>
+  </div>
+</MainLayout>
+
+<style>
+  .container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 0 20px;
+  }
+  .section-title {
+    color: #fff;
+    font-size: 2rem;
+    margin-bottom: 40px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 20px;
+  }
+  .page-item, .post-item {
+    background: rgba(255,255,255,0.03);
+    padding: 30px;
+    border-radius: 8px;
+    border-left: 4px solid #ff1801;
+    margin-bottom: 30px;
+    transition: transform 0.3s ease;
+  }
+  .page-item:hover, .post-item:hover {
+    transform: translateX(10px);
+    background: rgba(255,255,255,0.08);
+  }
+  .page-item h3, .post-item h3 {
+    color: #fff;
+    margin-top: 0;
+    font-size: 1.5rem;
+  }
+  .page-item article, .post-item article {
+    color: #aaa;
+    line-height: 1.6;
+  }
+</style>

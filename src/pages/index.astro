@@ -1,38 +1,177 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
+import Navigation from './components/Navigation.astro';
 ---
-<MainLayout title="首页 | 王纬博的网页制作">
-  <html lang="zh-cn">
-    <head>
-      <meta charset="utf-8" />
-      <style>
-        body {
-          background-color: #f0f8ff;
-          text-align: center;
-          padding-top: 50px;
-          font-family: 'Microsoft YaHei', sans-serif;
-        }
-        h1 { color: #d2691e; font-size: 40px; }
-        p { color: #555555; font-size: 20px; }
-        img {
-          max-width: 60%;
-          height: auto;
-          border: 10px solid white;
-          box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-          margin-top: 20px;
-          border-radius: 8px;
-        }
-      </style>
-    </head>
-    <body>
-      <h1>王纬博的网页，欢迎光临！</h1>
-      <p>不管多大年纪，学习新东西永远不晚。</p>
-      
-      <p>
-        <a href="/f1" style="color: #3b82f6; font-weight: bold; text-decoration: none; border: 2px solid #3b82f6; padding: 10px 20px; border-radius: 20px;">
-          进入 F1 速度世界
-        </a>
-      </p>
-    </body>
-  </html>
+<MainLayout title="Home | WeiBo Wang Web Development">
+  <Navigation />
+  <div class="hero">
+    <div class="noise"></div>
+    <div class="hero-content">
+      <h1 class="main-title">Weibo Wang's Portfolio</h1>
+      <p class="subtitle">AI Developer & Creative Explorer</p>
+      <p class="description">No matter how old you are, it's never too late to learn new things.</p>
+      <a href="/f1" class="cta-button">Enter the F1 Speed World</a>
+    </div>
+    <div class="floating-elements">
+      <div class="particle particle-1"></div>
+      <div class="particle particle-2"></div>
+      <div class="particle particle-3"></div>
+    </div>
+  </div>
+
+  <style>
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+      overflow: hidden;
+      color: #ffffff;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+
+    .noise {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://grainy-gradients.vercel.app/noise.svg');
+      opacity: 0.1;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .hero-content {
+      text-align: center;
+      z-index: 2;
+      max-width: 800px;
+      padding: 0 20px;
+    }
+
+    .main-title {
+      font-size: clamp(3rem, 10vw, 6rem);
+      font-weight: 900;
+      margin: 0;
+      background: linear-gradient(90deg, #ffffff, #ff1801);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: titleGlow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes titleGlow {
+      from { text-shadow: 0 0 20px rgba(255, 24, 1, 0.5); }
+      to { text-shadow: 0 0 40px rgba(255, 24, 1, 1); }
+    }
+
+    .subtitle {
+      font-size: 1.5rem;
+      color: #ff1801;
+      margin: 10px 0 20px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .description {
+      font-size: 1.2rem;
+      color: #a0a0a0;
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 15px 30px;
+      background: linear-gradient(45deg, #ff1801, #ff4500);
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 24, 1, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .cta-button:hover::before {
+      left: 100%;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(255, 24, 1, 0.5);
+    }
+
+    .floating-elements {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #ff1801;
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .particle-1 {
+      top: 20%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .particle-2 {
+      top: 60%;
+      right: 15%;
+      animation-delay: 2s;
+    }
+
+    .particle-3 {
+      bottom: 30%;
+      left: 70%;
+      animation-delay: 4s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.5; }
+      50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+      .hero-content {
+        padding: 0 10px;
+      }
+      .main-title {
+        font-size: clamp(2rem, 15vw, 4rem);
+      }
+      .subtitle {
+        font-size: 1.2rem;
+      }
+      .description {
+        font-size: 1rem;
+      }
+    }
+  </style>
 </MainLayout>

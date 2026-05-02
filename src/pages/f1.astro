@@ -1,7 +1,9 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
+import Navigation from './components/Navigation.astro';
 ---
-<MainLayout title="王纬博 | AI 开发者 & 艺术探索者">
+<MainLayout title="Wang Wei Bo | AI Developer & Art Explorer">
+  <Navigation />
   <div class="noise"></div>
   
   <section class="stage">
@@ -16,10 +18,10 @@ import MainLayout from '../layouts/MainLayout.astro';
 
       <div class="text-block">
         <span class="label">CREATIVE DEVELOPER</span>
-        <h1>王纬博 <br/><small>& RESEARCHER</small></h1>
+        <h1>Wang Wei Bo <br/><small>& RESEARCHER</small></h1>
         <p class="manifesto">
-          在 300KM/H 的算法中寻找色彩的平衡。<br/>
-          将神经网络的复杂，转化为画布上的纯粹。
+          Finding color balance in 300KM/H algorithms.<br/>
+          Transforming the complexity of neural networks into purity on canvas.
         </p>
         
         <div class="cta-group">
@@ -33,7 +35,7 @@ import MainLayout from '../layouts/MainLayout.astro';
   </section>
 
   <style>
-    /* --- 极客艺术风格定义 --- */
+    /* --- Geek Art Style Definition --- */
     :root {
       --primary: #ff1e00;
       --ink: #050505;

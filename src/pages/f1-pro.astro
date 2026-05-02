@@ -1,14 +1,65 @@
 ---
+import MainLayout from '../layouts/MainLayout.astro';
 import Navigation from './components/Navigation.astro';
 ---
 
-<html lang="zh-cn">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ULTRA VELOCITY | F1 技术简报</title>
+<MainLayout title="F1 Pro | Ultra Velocity">
+  <Navigation />
+
+  <div class="hero">
+    <div class="hero-img"></div>
+    <div class="hero-overlay"></div>
+    <h1>AERO</h1>
+    <div class="stats-bar">
+      <span><b>350</b> KM/H</span>
+      <span><b>1.8</b> SEC PIT</span>
+      <span><b>1000+</b> BHP</span>
+    </div>
+  </div>
+
+  <main class="container">
+    <div class="glow-blob" style="top: 120%; left: -10%;"></div>
+
+    <section class="grid-section">
+      <div class="text-content">
+        <h2>The Beauty of Fluid Dynamics</h2>
+        <p>
+          In the airflow at 300km/h, the race car is not just a machine, but a precise physical model.
+          Using **CFD (Computational Fluid Dynamics)**, every millimeter of the sidepod edge undergoes billions of partial differential equation calculations,
+          aiming to convert turbulence into downforce, allowing the car to fight gravity in corners.
+        </p>
+      </div>
+      <div class="tech-specs">
+        <div><span>DRS Drag Reduction System</span> <span>ACTIVE</span></div>
+        <div><span>Front Wing Angle</span> <span>12.5°</span></div>
+        <div><span>Diffuser Efficiency</span> <span>+18.3%</span></div>
+        <div><span>Downforce Level</span> <span>ULTRA</span></div>
+      </div>
+    </section>
+
+    <section class="grid-section" style="grid-template-columns: 0.8fr 1.2fr;">
+      <div class="tech-specs">
+        <div style="color: var(--accent-blue);">// NEURAL NETWORK SIMULATION</div>
+        <div><span>Data Points/Second</span> <span>1.2M</span></div>
+        <div><span>Pit Stop Probability Prediction</span> <span>89.4%</span></div>
+        <div><span>Tire Degradation Model</span> <span>VALID</span></div>
+      </div>
+      <div class="text-content">
+        <h2>Digital Twin and AI Decision Making</h2>
+        <p>
+          Modern F1 racing is a battle of computing power. Based on **Reinforcement Learning** strategy models,
+          real-time processing of thousands of sensors' feedback. We're not just racing, we're training a digital soul in real-time that can predict every overtaking window.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer style="text-align: center; padding: 100px; color: #333; letter-spacing: 10px;">
+    LIMITLESS ENGINEERING
+  </footer>
+
   <style>
-    /* --- 极客美学定义 --- */
+    /* --- Geek Aesthetic Definition --- */
     @font-face {
       font-family: 'TechFont';
       src: local('Orbitron'), local('Rajdhani'), sans-serif;
@@ -163,61 +214,62 @@ import Navigation from './components/Navigation.astro';
       filter: blur(50px);
     }
 
+    /* --- 额外优化特效 --- */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 80%, rgba(255, 24, 1, 0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(0, 243, 255, 0.1) 0%, transparent 50%);
+      z-index: -1;
+      animation: backgroundShift 10s ease-in-out infinite alternate;
+    }
+
+    @keyframes backgroundShift {
+      0% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+
+    .grid-section:hover .text-content h2 {
+      background: linear-gradient(90deg, var(--f1-red), var(--accent-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: textGlow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes textGlow {
+      from { text-shadow: 0 0 10px rgba(255, 24, 1, 0.5); }
+      to { text-shadow: 0 0 20px rgba(255, 24, 1, 1); }
+    }
+
+    .tech-specs:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateX(10px);
+      transition: all 0.3s ease;
+    }
+
+    footer {
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 24, 1, 0.1), transparent);
+      animation: footerShine 3s ease-in-out infinite;
+    }
+
+    @keyframes footerShine {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
   </style>
-</head>
-<body>
-  <Navigation />
-
-  <div class="hero">
-    <div class="hero-img"></div>
-    <div class="hero-overlay"></div>
-    <h1>AERO</h1>
-    <div class="stats-bar">
-      <span><b>350</b> KM/H</span>
-      <span><b>1.8</b> SEC PIT</span>
-      <span><b>1000+</b> BHP</span>
-    </div>
-  </div>
-
-  <main class="container">
-    <div class="glow-blob" style="top: 120%; left: -10%;"></div>
-
-    <section class="grid-section">
-      <div class="text-content">
-        <h2>流体力学之美</h2>
-        <p>
-          在 300km/h 的气流中，赛车不仅是一台机器，更是一个精确的物理模型。
-          利用 **CFD (计算流体动力学)**，每一毫米的侧箱边缘都经过数亿次的偏微分方程计算，
-          旨在将湍流转化为下压力，让赛车在弯道中对抗重力。
-        </p>
-      </div>
-      <div class="tech-specs">
-        <div><span>DRS 减阻系统</span> <span>ACTIVE</span></div>
-        <div><span>前翼迎角</span> <span>12.5°</span></div>
-        <div><span>扩散器效能</span> <span>+18.3%</span></div>
-        <div><span>下压力等级</span> <span>ULTRA</span></div>
-      </div>
-    </section>
-
-    <section class="grid-section" style="grid-template-columns: 0.8fr 1.2fr;">
-      <div class="tech-specs">
-        <div style="color: var(--accent-blue);">// NEURAL NETWORK SIMULATION</div>
-        <div><span>数据点/秒</span> <span>1.2M</span></div>
-        <div><span>进站概率预测</span> <span>89.4%</span></div>
-        <div><span>轮胎退化模型</span> <span>VALID</span></div>
-      </div>
-      <div class="text-content">
-        <h2>数字孪生与 AI 决策</h2>
-        <p>
-          现代 F1 比赛是算力的对抗。基于 **Reinforcement Learning (强化学习)** 的策略模型，
-          实时处理数千台传感器的回传。我们不只是在比赛，我们在实时训练一个能够预判每一个超车窗口的数字灵魂。
-        </p>
-      </div>
-    </section>
-  </main>
-
-  <footer style="text-align: center; padding: 100px; color: #333; letter-spacing: 10px;">
-    LIMITLESS ENGINEERING
-  </footer>
-</body>
-</html>
+</MainLayout>
